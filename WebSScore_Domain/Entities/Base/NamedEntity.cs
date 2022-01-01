@@ -2,8 +2,9 @@
 
 namespace WebSScore_Domain
 {
-    public class NamedEntity : Entity, INamedEntity
+    public abstract class NamedEntity : Entity, INamedEntity
     {
-        public string name { get; set; }
+        public string Name { get; set; }
+        public string name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }

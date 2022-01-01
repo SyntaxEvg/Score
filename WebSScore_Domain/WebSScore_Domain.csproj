@@ -6,12 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Новая папка - Копировать %282%29\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Score\Score.csproj" />
-  </ItemGroup>
-
 </Project>

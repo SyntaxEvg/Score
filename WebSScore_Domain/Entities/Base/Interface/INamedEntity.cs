@@ -2,8 +2,8 @@
 {
     public interface INamedEntity: IEntity
     {
-        public int id { get; set; }
-        public string name { get; set; }
+         int id { get; set; }
+         string Name { get; set; }
        
     }
 }

@@ -2,7 +2,7 @@
 
 namespace MVM.Data.TestData
 {
-    public static class Employees
+    public static partial class Employees
     {
        static string  ipUser = "";
 

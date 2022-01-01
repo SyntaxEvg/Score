@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVM.ViewModel;
+using Score.Services.Interface;
 
 namespace WebStore.Components;
 
@@ -19,7 +20,7 @@ public class SectionsViewComponent : ViewComponent
         var parent_sections_views = parent_sections
            .Select(s => new SectionViewModel
             {
-               Id = s.Id,
+               Id = s.id,
                Name = s.Name,
                Order = s.Order,
             })
@@ -32,7 +33,7 @@ public class SectionsViewComponent : ViewComponent
             foreach (var child_section in childs)
                 parent_section.ChildSections.Add(new SectionViewModel
                 {
-                    Id = child_section.Id,
+                    Id = child_section.id,
                     Name = child_section.Name,
                     Order = child_section.Order,
                     Parent = parent_section

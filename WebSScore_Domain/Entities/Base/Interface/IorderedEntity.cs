@@ -1,9 +1,9 @@
 ﻿namespace WebSScore_Domain.Entities.Base.Interface
 {
-    public interface IorderedEntity : IEntity
+    public interface IOrderedEntity : IEntity
     {
-        public int id { get; set; }
-        public string name { get; set; }
+         int id { get; set; }
+         string name { get; set; }
 
     }
 }

@@ -5,5 +5,6 @@ namespace WebSScore_Domain
     public abstract class Entity : IEntity
     {
         public int id { get ; set; }
+        
     }
 }
