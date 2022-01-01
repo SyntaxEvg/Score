@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MVM.ViewModel
 {
-    public class EmployeeEditViewModel
+    public class EmployeeEditViewModel//: IValidatableObject -для ручной валидации и назначение результатов
     {  //нужно для показа   сотрудников  и фильтрации...
          [HiddenInput]
         public int Id { get; set; }
@@ -23,5 +23,10 @@ namespace MVM.ViewModel
         public int Age { get; set; }
         [Display(Name ="IP adress")]
         public string IP { get; set; }
+
+        //IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
