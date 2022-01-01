@@ -1,0 +1,56 @@
+﻿@model IEnumerable<MVM.Model.Employee> 
+
+
+<div class="container">
+    <h3>Сотрудники  </h3>
+      <a class="btn btn-default" asp-action="Edit">Создать</a> 
+    @if (Model.Any())
+    {
+        <table class="table"> 
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Имя</td>           
+                    <td>Отчество</td>
+                    <td>Фамилия</td>
+                    <td>Возраст</td>
+                    <td>IP-адрес</td>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                    <td>@item.LastName</td>
+                    <td>@item.FirstName</td>
+                    <td>@item.Patronymic</td>
+                    <td>@item.Age</td>
+                    <td>@item.IP</td>
+                    <td>
+                        <a asp-controller="Employees" asp-action="Details" asp-route-id="@item.Id">Инфо</a>
+                        <a asp-controller="Employees" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-Id="@item.Id" asp-route-Info="123" class="text-danger">
+                            <i class="fa fa-trash-o"></i>
+                        </a>
+                        <form asp-action="DeleteConfirmed" asp-route-id="@item.Id">
+                            <input type="submit" value="Del" class="btn btn-sm btn-danger"/>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        </table>
+    }
+
+
+
+    else
+    {
+        <p>Сотрудников нет...</p>
+    }
+    <a asp-controller="Home" asp-action="Index">На главную</a>
+</div>

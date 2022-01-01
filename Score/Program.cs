@@ -1,23 +1,21 @@
+using MVM.Services;
 var builder = WebApplication.CreateBuilder(args);
+var Service = builder.Services;
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-
+Service.AddControllersWithViews(
+//opt.Conventions.Add(Tes
+);
+Service.AddSingleton<IEmpData, InMemoryEmpData>();//регистрация сервиса 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
+    app.UseDeveloperExceptionPage();
 }
 app.UseStaticFiles();
-
 app.UseRouting();
-
-app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapDefaultControllerRoute();
+//app.MapGet("/", () => "Hello World!");
 
 app.Run();
+
