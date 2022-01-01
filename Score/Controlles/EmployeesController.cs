@@ -62,7 +62,7 @@ namespace MVM.Controlles
         [HttpPost]
         public IActionResult Edit(EmployeeEditViewModel emp)
         {
-
+           // ModelState.AddModelError("что не нравитсяв модели", "Имя ошибки";
             if (!ModelState.IsValid)
             {
                 return View(emp);
