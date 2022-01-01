@@ -3,9 +3,9 @@ var builder = WebApplication.CreateBuilder(args);
 var Service = builder.Services;
 
 Service.AddControllersWithViews(
-//opt.Conventions.Add(Tes
+   //opt.Conventions.Add(Tes
 );
-Service.AddSingleton<IEmpData, InMemoryEmpData>();//регистрация сервиса 
+Service.AddSingleton<IEmpData, InMemoryEmpData>();//регистрация сервиса 1ЭКЗЕМЛЯР,НА ВСЕ ВРЕМЯ
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
