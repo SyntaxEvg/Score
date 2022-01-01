@@ -62,6 +62,12 @@ namespace MVM.Controlles
         [HttpPost]
         public IActionResult Edit(EmployeeEditViewModel emp)
         {
+
+            if (!ModelState.IsValid)
+            {
+                return View(emp);
+            }
+
               var temp= new Employee
                 {
                 Id = emp.Id,
