@@ -1,5 +1,5 @@
 ﻿using WebSScore_Domain;
-using WebStore.Components;
+using WebStore.Domain;
 using WebStore.Domain.Entities;
 
 namespace Score.Services.Interface

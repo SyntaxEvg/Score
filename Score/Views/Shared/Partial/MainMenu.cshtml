@@ -3,13 +3,18 @@
 								<li><a asp-controller="Home" asp-action="Index" class="active">Home</a></li>
 								<li class="dropdown"><a href="#">Магазин<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
+										<li><a asp-controller = "Catalog"  asp-action="Index">Каталог</a></li> 
+                                    </ul>
+                                </li> 
+								@*<li class="dropdown"><a href="#">Магазин<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
                                         <li><a asp-controller="Shop" asp-action="Index">Каталог</a></li>
 										<li><a asp-controller ="ProductDetails" asp-action="Index">О товаре</a></li> 
 										<li><a asp-controller = "Сheckout" asp-action="Index">>Оформить заказ</a></li> 
 										<li><a asp-controller = "Cart" asp-action="Index">Корзина</a></li> 
 										<li><a asp-controller = "Login" asp-action="Index">Вход</a></li> 
                                     </ul>
-                                </li> 
+                                </li> *@
 								<li class="dropdown"><a href="#">Блог<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a asp-controller = "Blog" asp-action="Index" >Список блогов</a></li>

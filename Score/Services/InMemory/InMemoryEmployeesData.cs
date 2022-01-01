@@ -1,9 +1,10 @@
 ﻿
 using MVM.Model;
+using MVM.Services;
 
 namespace WebStore.Services.InMemory;
 
-public class InMemoryEmployeesData : IEmployeesData
+public class InMemoryEmployeesData : IEmpData
 {
     private readonly ILogger<InMemoryEmployeesData> _Logger;
     private readonly ICollection<Employee> _Employees;

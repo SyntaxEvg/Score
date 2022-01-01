@@ -1,7 +1,7 @@
-﻿
-using Score.Services.Interface;
+﻿using Score.Services.Interface;
 using WebSScore_Domain;
-using WebStore.Components;
+using WebStore.Domain;
+using WebStore.Domain.Entities;
 
 namespace WebStore.Services.InSQL;
 
@@ -15,7 +15,7 @@ public class SqlProductData : IProductData
 
     public IEnumerable<Brand> GetBrands() => _db.Brands;
 
-    public IEnumerable<Product> GetProducts(ProductFilter? Filter = null)
+    public IEnumerable<Product> IProductData.GetProducts(ProductFilter? Filter = null)
     {
         IQueryable<Product> query = _db.Products;
 
@@ -27,4 +27,6 @@ public class SqlProductData : IProductData
 
         return query;
     }
+
+   
 }
