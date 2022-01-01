@@ -2,6 +2,7 @@
 using Score.Services.Interface;
 using WebSScore_Domain;
 using WebStore.Components;
+using WebStore.Domain.Entities;
 
 namespace WebStore.Services.InMemory;
 
@@ -14,7 +15,7 @@ public class InMemoryProductData : IProductData
 
     public IEnumerable<Product> GetProducts(ProductFilter? Filter = null)
     {
-        IEnumerable<Product> query = TestData.Products;
+        IEnumerable<Product> query = MVM.Data.TestData.Employees.Products;
 
         //if (Filter?.SectionId != null)
         //    query = query.Where(p => p.SectionId == Filter.SectionId);
