@@ -32,11 +32,9 @@ Service.Configure<IdentityOptions>(
         opt.Password.RequiredLength = 3;
         opt.Password.RequiredUniqueChars = 3;
 #endif
-
         opt.User.RequireUniqueEmail = false;
         opt.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWXYZ1234567890";
-
-        opt.Lockout.AllowedForNewUsers = false;
+        opt.Lockout.AllowedForNewUsers = false;//отключение двухфакторной
         opt.Lockout.MaxFailedAccessAttempts = 10;
         opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
     }
@@ -44,7 +42,7 @@ Service.Configure<IdentityOptions>(
 Service.ConfigureApplicationCookie(opt =>
 {
     opt.Cookie.Name = "WebStore.GB";
-    opt.Cookie.HttpOnly = true;
+    opt.Cookie.HttpOnly = true;//только  http
 
     //opt.Cookie.Expiration = TimeSpan.FromDays(10); // устарело
     opt.ExpireTimeSpan = TimeSpan.FromDays(10);
@@ -53,7 +51,7 @@ Service.ConfigureApplicationCookie(opt =>
     opt.LogoutPath = "/Account/Logout";
     opt.AccessDeniedPath = "/Account/AccessDenied";
 
-    opt.SlidingExpiration = true;
+    opt.SlidingExpiration = true;//индификатор для анонимного юзера , и назначени id после подключения
 });
 Service.AddSingleton<IEmpData, InMemoryEmpData>();//регистрация сервиса 1ЭКЗЕМЛЯР,НА ВСЕ ВРЕМЯ
 Service.AddSingleton<IProductData, InMemoryProductData>();
@@ -70,6 +68,8 @@ if (app.Environment.IsDevelopment())
 }
 app.UseStaticFiles();
 app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapDefaultControllerRoute();
 //app.MapGet("/", () => "Hello World!");
 
