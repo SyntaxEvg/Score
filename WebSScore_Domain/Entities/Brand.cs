@@ -15,6 +15,6 @@ namespace WebSScore_Domain
        
 
         public ICollection<Product> Products { get; set; }
-
+        public string name { get; set; }
     }
 }

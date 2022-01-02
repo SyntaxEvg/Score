@@ -13,7 +13,7 @@ public class InMemoryProductData : IProductData
 
     public IEnumerable<Brand> GetBrands() => MVM.Data.TestData.Employees.Brands;
 
-    public IEnumerable<Product> GetProducts(ProductFilter? Filter = null)
+    public IEnumerable<Product> GetProducts(Domain.ProductFilter? Filter = null)
     {
         IEnumerable<Product> query = MVM.Data.TestData.Employees.Products;
 
@@ -28,6 +28,4 @@ public class InMemoryProductData : IProductData
 
         return query;
     }
-
-  
 }

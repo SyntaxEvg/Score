@@ -1,6 +1,5 @@
 ﻿using WebSScore_Domain.Entities.Base.Interface;
 using System.ComponentModel.DataAnnotations.Schema;
-using WebSScore_Domain.Entities.Base.Interface;
 using WebStore.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,5 +16,6 @@ namespace WebSScore_Domain
         public Section Parent { get; set; }
 
         public ICollection<Product> Products { get; set;}
+        public string name { get; set; }
     }
 }

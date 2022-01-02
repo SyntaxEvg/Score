@@ -16,7 +16,7 @@ public class SqlProductData : IProductData
 
     public IEnumerable<Brand> GetBrands() => _db.Brands;
 
-    public IEnumerable<Product> IProductData.GetProducts(ProductFilter? Filter = null)
+    public IEnumerable<Product> GetProducts(ProductFilter? Filter = null)
     {
         IQueryable<Product> query = _db.Products;
 

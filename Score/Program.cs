@@ -13,7 +13,7 @@ Service.AddControllersWithViews(
 
 Service.AddDbContext<WebStoreDB>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
-Service.AddTransient<IDbInitializer, DbInitializer>();
+//Service.AddTransient<IDbInitializer, DbInitializer>();
 Service.AddSingleton<IEmpData, InMemoryEmpData>();//регистрация сервиса 1ЭКЗЕМЛЯР,НА ВСЕ ВРЕМЯ
 Service.AddSingleton<IProductData, InMemoryProductData>();
 var app = builder.Build();

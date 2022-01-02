@@ -6,7 +6,7 @@ namespace WebSScore_Domain
     public abstract class Entity : IEntity
     { 
         [Key]
-        [DataBaseGenerator]
+        //[DataBaseGenerator]
         public int id { get ; set; }
         
     }
