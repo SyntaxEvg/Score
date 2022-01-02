@@ -6,6 +6,7 @@ using WebStore.DAL.Context;
 using WebStore.Domain.Entities.Identity;
 using WebStore.Services;
 using WebStore.Services.InMemory;
+using WebStore.Services.InSQL;
 using WebStore.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -53,8 +54,10 @@ Service.ConfigureApplicationCookie(opt =>
 
     opt.SlidingExpiration = true;//индификатор для анонимного юзера , и назначени id после подключения
 });
-Service.AddSingleton<IEmpData, InMemoryEmpData>();//регистрация сервиса 1ЭКЗЕМЛЯР,НА ВСЕ ВРЕМЯ
-Service.AddSingleton<IProductData, InMemoryProductData>();
+//Service.AddSingleton<IEmpData, InMemoryEmpData>();//регистрация сервиса 1ЭКЗЕМЛЯР,НА ВСЕ ВРЕМЯ
+//Service.AddSingleton<IProductData, InMemoryProductData>();
+Service.AddScoped<IEmpData, SqlEmployeesData>();
+Service.AddScoped<IProductData, SqlProductData>(); // !!! AddScoped !!!
 var app = builder.Build();
 await using (var scope = app.Services.CreateAsyncScope())
 {

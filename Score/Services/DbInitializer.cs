@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using WebStore.DAL.Context;
 using WebStore.Services.Interfaces;
 
@@ -41,13 +42,15 @@ public class DbInitializer : IDbInitializer
         if (pending_migrations.Any())
         {
             _Logger.LogInformation("Выполнение миграции БД...");
-            
+
             await _db.Database.MigrateAsync(Cancel).ConfigureAwait(false);
 
             _Logger.LogInformation("Выполнение миграции БД выполнено успешно");
         }
 
         await InitializeProductsAsync(Cancel).ConfigureAwait(false);
+
+        await InitializeEmployeesAsync(Cancel).ConfigureAwait(false);
 
         _Logger.LogInformation("Инициализация БД выполнена успешно");
     }
@@ -62,42 +65,63 @@ public class DbInitializer : IDbInitializer
 
         _Logger.LogInformation("Инициализация тестовых данных БД ...");
 
-        _Logger.LogInformation("Добавление секций в БД ...");
+        var sections_pool = MVM.Data.TestData.Employees.Sections.ToDictionary(s => s.id);
+        var brands_pool = MVM.Data.TestData.Employees.Brands.ToDictionary(b => b.id);
+
+        foreach (var child_section in MVM.Data.TestData.Employees.Sections.Where(s => s.ParentId is not null))
+            child_section.Parent = sections_pool[(int)child_section.ParentId!];
+
+        foreach (var product in MVM.Data.TestData.Employees.Products)
+        {
+            product.Section = sections_pool[product.SectionId];
+            if (product.BrandId is { } brand_id)
+                product.Brand = brands_pool[brand_id];
+
+            product.id = 0;
+            product.SectionId = 0;
+            product.BrandId = null;
+        }
+
+        foreach (var section in MVM.Data.TestData.Employees.Sections)
+        {
+            section.id = 0;
+            section.ParentId = null;
+        }
+
+        foreach (var brand in MVM.Data.TestData.Employees.Brands)
+            brand.id = 0;
+
         await using (await _db.Database.BeginTransactionAsync(Cancel))
         {
             await _db.Sections.AddRangeAsync(MVM.Data.TestData.Employees.Sections, Cancel);
-
-            await _db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Sections] ON", Cancel);
-            await _db.SaveChangesAsync(Cancel);
-            await _db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Sections] OFF", Cancel);
-
-            await _db.Database.CommitTransactionAsync(Cancel);
-        }
-
-        _Logger.LogInformation("Добавление брендов в БД ...");
-        await using (await _db.Database.BeginTransactionAsync(Cancel))
-        {
             await _db.Brands.AddRangeAsync(MVM.Data.TestData.Employees.Brands, Cancel);
-
-            await _db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Brands] ON", Cancel);
-            await _db.SaveChangesAsync(Cancel);
-            await _db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Brands] OFF", Cancel);
-
-            await _db.Database.CommitTransactionAsync(Cancel);
-        }
-
-        _Logger.LogInformation("Добавление товаров в БД ...");
-        await using (await _db.Database.BeginTransactionAsync(Cancel))
-        {
             await _db.Products.AddRangeAsync(MVM.Data.TestData.Employees.Products, Cancel);
 
-            await _db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Products] ON", Cancel);
             await _db.SaveChangesAsync(Cancel);
-            await _db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Products] OFF", Cancel);
 
-            await _db.Database.CommitTransactionAsync(Cancel);//сохранение транзакц,  чтобы не пропадали
+            await _db.Database.CommitTransactionAsync(Cancel);
         }
 
         _Logger.LogInformation("Инициализация тестовых данных БД выполнена успешно");
+    }
+
+    private async Task InitializeEmployeesAsync(CancellationToken Cancel)
+    {
+        if (await _db.Employees.AnyAsync(Cancel))
+        {
+            _Logger.LogInformation("Инициализация сотрудников не требуется");
+            return;
+        }
+
+        _Logger.LogInformation("Инициализация сотрудников...");
+        await using var transaction = await _db.Database.BeginTransactionAsync(Cancel);
+
+        MVM.Data.TestData.Employees.player.ForEach(employee => employee.Id = 0);
+
+        await _db.Employees.AddRangeAsync(MVM.Data.TestData.Employees.player, Cancel);
+        await _db.SaveChangesAsync(Cancel);
+
+        await transaction.CommitAsync(Cancel);
+        _Logger.LogInformation("Инициализация сотрудников выполнена успешно");
     }
 }

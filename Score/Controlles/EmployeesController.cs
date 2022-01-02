@@ -15,7 +15,7 @@ namespace MVM.Controlles
             EmpData=empData;
         }
 
-
+        //[Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
            var _employees = EmpData.GetAll();
@@ -29,6 +29,7 @@ namespace MVM.Controlles
         }
         //[HttpGet]
         //[Route("Employees/Emplooyees")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult Details(int id)
         {
             var _player = EmpData.GetById(id);
@@ -59,7 +60,7 @@ namespace MVM.Controlles
             return View(Emp);
             }
 
-        [HttpPost]
+        [HttpPost]  //[Authorize(Roles = "Admin")]
         public IActionResult Edit(EmployeeEditViewModel emp)
         {
            // ModelState.AddModelError("что не нравитсяв модели", "Имя ошибки";

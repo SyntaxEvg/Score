@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-namespace WebStore.Domain.Entities.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
 public class User : IdentityUser
 {

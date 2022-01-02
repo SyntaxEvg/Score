@@ -10,11 +10,11 @@ namespace MVM.Services
         //IEnumerable<EmployeeEditViewModel> GetAll();
         //EmployeeEditViewModel GetById(int id);
 
-       public IEnumerable<Employee> GetAll();
-       public Employee GetById(int id);       
-       public bool Edit(Employee employee);
-       public bool Delete(int id);
-       public int Add(Employee employee);
+      IEnumerable<Employee> GetAll();
+      Employee? GetById(int id);       
+      bool Edit(Employee employee);
+      bool Delete(int id);
+      int Add(Employee employee);
 
     }
 }

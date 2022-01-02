@@ -3,6 +3,7 @@ using WebSScore_Domain;
 using WebStore.DAL.Context;
 using WebStore.Domain;
 using WebStore.Domain.Entities;
+using WebStore.Services.Interfaces;
 
 namespace WebStore.Services.InSQL;
 
@@ -28,6 +29,4 @@ public class SqlProductData : IProductData
 
         return query;
     }
-
-   
 }

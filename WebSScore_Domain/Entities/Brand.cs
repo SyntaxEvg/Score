@@ -1,5 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿
+
+using Microsoft.EntityFrameworkCore;
 using WebSScore_Domain.Entities.Base.Interface;
 using WebStore.Domain.Entities;
 
