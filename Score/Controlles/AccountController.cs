@@ -3,6 +3,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Domain.Entities.Identity;
+using WebStore.ViewModels.Identity;
 
 namespace WebStore.Controllers;
 
@@ -27,7 +28,7 @@ public class AccountController : Controller
 
         var user = new User
         {
-            UserName = Model.UserName,
+            UserName = Model.UserName, 
         };
 
         var registration_result = await _UserManager.CreateAsync(user, Model.Password);
