@@ -5,7 +5,7 @@ using WebSScore_Domain.Entities.Base.Interface;
 
 namespace WebStore.Domain.Entities;
 
-[Index(nameof(Name))]
+[Index(nameof(Name))]//Индексация по имени
 public class Product : NamedEntity, IOrderedEntity
 {
     public int Order { get; set; }
