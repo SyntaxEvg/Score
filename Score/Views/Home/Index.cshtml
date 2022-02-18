@@ -1,8 +1,22 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿	
+	<partial name="Partial/Slider" />
+	
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<partial name="Partial/left-sidebar"/>				
+				</div>
+				
+				<div class="col-sm-9 padding-right">
+					<partial name="Partial/features_items" />
+					<partial name="Partial/_Products" model="ViewBag.Products"/>			
+					<partial name="Partial/category-tab"/>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+					<partial name="Partial/recommended_items"/>
+				</div><!--features_items-->
+
+					
+				</div>
+			</div>
+	</section>
